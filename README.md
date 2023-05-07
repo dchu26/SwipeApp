@@ -8,8 +8,8 @@
     - Can perform actions on these cards through swiping (up, down, left, right)
     - Possible options for swipe commands listed below
         - A. Ability to move back and forth between cards
-            - Up = Save into invite list
-            - Down = Discard
+            - Up = Discard
+            - Down = Save into invite list
             - Left = Previous card
             - Right = Next card
         - B. No ability to move back and forth between cards
