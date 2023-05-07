@@ -18,7 +18,6 @@ struct CardView: View {
             //Rectangle is where the card itself will be changed
             Rectangle()
                 /*Initializes the size of the card
-                 To do: Make the card size dynamic so that it fits the size of any iOS device regardless of the dimensions
                 */
                 .frame(width: 320, height: 420)
                 .border(.white, width: 6.0)
@@ -44,18 +43,21 @@ struct CardView: View {
                     offset = gesture.translation
                     //Animation for changing the color
                     withAnimation{
-                        changeColor(width: offset.width)
+                        changeColor(height: offset.height)
                     }
+                    //When the card is fully swiped
                 } .onEnded { _ in
                     withAnimation{
-                        swipeCard(width: offset.width)
-                        changeColor(width: offset.width)
+                        //swipeCard(width: offset.width)
+                        //swipeCardUp(height: offset.height)
+                        swipeCardHandler(width: offset.width, height: offset.height)
+                        changeColor(height: offset.height)
                     }
                 }
         )
     }
     
-    //Function for handling the swiping of the card horizontally
+    //Function for handling the swiping of the card horizontally, original function for testing swiping mechanic
     func swipeCard(width: CGFloat){
         switch width{
         case -500...(-150):
@@ -64,16 +66,62 @@ struct CardView: View {
         case 150...(500):
             print("\(person) added")
             offset = CGSize(width: 500, height: 0)
+        //Defaults the card to the center of the screen
         default:
             offset = .zero
         }
     }
     
+    //Function for handling the swiping of the card vertically, originally used to test swiping up mechanic
+    func swipeCardUp(height: CGFloat){
+        switch height{
+        case -500...(-150):
+            print("\(person) removed")
+            offset = CGSize(width: 0, height: -800)
+        case 150...(500):
+            print("\(person) added")
+            offset = CGSize(width: 0, height: 800)
+        //Defaults the card to the center of the screen
+        default:
+            offset = .zero
+        }
+    }
+    
+    
+    //Function for handling the swiping of the card in 4 directions
+    func swipeCardHandler(width: CGFloat ,height: CGFloat){
+        //Cases for handling width and height, defaults to an offset of zero
+        
+        //Swiping left
+        if (width < -150 && width > -500 && height < 150 && height > -150){
+            offset = CGSize(width: -500, height: 0)
+        }
+        //Swiping right
+        else if (width > 150 && width < 500 && height < 150 && height > -150){
+            offset = CGSize(width: 500, height: 0)
+        }
+        //Swiping down
+        else if (width > -100 && width < 100 && height < 500 && height > 150){
+            offset = CGSize(width: 0, height: 500)
+        }
+        //Swiping up
+        else if (width > -100 && width < 100 && height < -150 && height > -500){
+            offset = CGSize(width: 0, height: -500)
+        }
+        //Defaults to center of the screen, i.e. user does not swipe in an accepted direction
+        else{
+            offset = .zero
+        }
+        
+    }
+    
     //Function for changing the color of the card when dragged left or right
-    func changeColor(width: CGFloat){
-        switch width{
+    func changeColor(height: CGFloat){
+        switch height{
+        //Swiping up is to discard
         case -500...(-130):
             color = .red
+        //Swiping down is to save
         case 130...(500):
             color = .green
         //Currently, default color of the background of the card is set to black
@@ -83,9 +131,10 @@ struct CardView: View {
     }
 }
 
+//Preview
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(person: "One")
+        CardView(person: "test")
     }
 }
 
