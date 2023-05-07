@@ -31,4 +31,13 @@
 - Any other UI improvements that may make the project look more visually appealing and intuitive for the user
     - Including but not limited to color choices, design decisions, etc…
 
-<img src='http://g.recordit.co/K0TIsjIolk.gif' title='Demo' width='' alt='Demo'>
+
+## Visual Progress
+
+- v1
+    - Cards are only able to be swiped left and right
+<img src='http://g.recordit.co/K0TIsjIolk.gif' title='Demo v1' width='' alt='Demo'>
+
+- v2
+    - Cards can be swiped up, down, left, and right
+<img src='http://g.recordit.co/vNTsK5PxP2.gif' title='Demo v2' width='' alt='Demo v2'>
