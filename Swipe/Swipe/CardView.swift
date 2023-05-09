@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CardView: View {
-    var person: String
+    var person: Person
     
     @State private var offset = CGSize.zero
     @State private var color: Color = .black
@@ -26,11 +26,10 @@ struct CardView: View {
                 .shadow(radius: 4)
             //HStack is where the contents of the card should be displayed
             HStack{
-                Text(person)
+                Text(person.firstName)
                     .font(.largeTitle)
                     .foregroundColor(.white)
                     .bold()
-                
             }
         }
         //This portion creates the card movement effect; changing the height and width multiplier changes the speed of the swipe effect
@@ -134,7 +133,7 @@ struct CardView: View {
 //Preview
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(person: "test")
+        CardView(person: Person.samplePerson)
     }
 }
 

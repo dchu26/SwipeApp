@@ -11,11 +11,14 @@ struct ContentView: View {
     
     //Temporarily using an array of strings as placeholders, will change later to accommodate for data to be read
     
-    private var people: [String] = ["One", "Two", "Three", "Four", "Five"].reversed()
+    //private var people: [String] = ["One", "Two", "Three", "Four", "Five"].reversed()
+    
+    private var people: [Person] = Person.allPeople.reversed()
+    
     var body: some View {
         VStack {
             ZStack{
-                ForEach(people, id: \.self){ person in
+                ForEach(people, id: \.firstName){ person in
                     CardView(person: person)
                 }
             }
