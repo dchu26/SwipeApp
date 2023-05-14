@@ -7,14 +7,31 @@
 
 import Foundation
 
+//struct for a person
 struct Person: Codable {
-    var firstName: String
+    //Attributes of a person object
+    var name: String
+    var photo: String
+    var about: String
+    var company: String
+    var email: String
+    var telegram: String
+    var whatsapp: String
+    var phone: String
+    var linkedin: String
+    var tags: String
+    var notes: String
+    var location: String
+    
     //Name of file should be put there
     static let allPeople: [Person] = Bundle.main.decode(file: "example.json")
     
     //For sample preview
     static let samplePerson: Person = allPeople[0]
+
 }
+
+
 
 extension Bundle {
     func decode<T: Decodable>(file: String) -> T {

@@ -14,7 +14,6 @@
 		551FF6002A058A23003722F8 /* SwipeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551FF5FF2A058A23003722F8 /* SwipeTests.swift */; };
 		551FF60A2A058A23003722F8 /* SwipeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551FF6092A058A23003722F8 /* SwipeUITests.swift */; };
 		551FF60C2A058A23003722F8 /* SwipeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551FF60B2A058A23003722F8 /* SwipeUITestsLaunchTests.swift */; };
-		551FF6192A058A49003722F8 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551FF6182A058A49003722F8 /* CardView.swift */; };
 		551FF61B2A09C253003722F8 /* JSONManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551FF61A2A09C253003722F8 /* JSONManager.swift */; };
 		551FF61E2A09C75C003722F8 /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 551FF61D2A09C75C003722F8 /* example.json */; };
 /* End PBXBuildFile section */
@@ -47,7 +46,6 @@
 		551FF6052A058A23003722F8 /* SwipeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwipeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		551FF6092A058A23003722F8 /* SwipeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeUITests.swift; sourceTree = "<group>"; };
 		551FF60B2A058A23003722F8 /* SwipeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		551FF6182A058A49003722F8 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		551FF61A2A09C253003722F8 /* JSONManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONManager.swift; sourceTree = "<group>"; };
 		551FF61D2A09C75C003722F8 /* example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,7 +102,6 @@
 				551FF5F02A058A23003722F8 /* ContentView.swift */,
 				551FF5F22A058A23003722F8 /* Assets.xcassets */,
 				551FF5F42A058A23003722F8 /* Preview Content */,
-				551FF6182A058A49003722F8 /* CardView.swift */,
 			);
 			path = Swipe;
 			sourceTree = "<group>";
@@ -269,7 +266,6 @@
 			files = (
 				551FF5F12A058A23003722F8 /* ContentView.swift in Sources */,
 				551FF61B2A09C253003722F8 /* JSONManager.swift in Sources */,
-				551FF6192A058A49003722F8 /* CardView.swift in Sources */,
 				551FF5EF2A058A23003722F8 /* SwipeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

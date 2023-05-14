@@ -1,23 +1,99 @@
 [
     {
-        "firstName": "Mario"
+        "name": "Phillip B.",
+        "photo": "Mario",
+        "about": "",
+        "company": "",
+        "email": "",
+        "telegram": "",
+        "whatsapp": "",
+        "phone": "",
+        "linkedin": "",
+        "tags": "",
+        "notes": "",
+        "location": ""
     },
     {
-        "firstName": "Luigi"
+        "name": "Michael J.",
+        "photo": "Mario",
+        "about": "",
+        "company": "",
+        "email": "",
+        "telegram": "",
+        "whatsapp": "",
+        "phone": "",
+        "linkedin": "",
+        "tags": "",
+        "notes": "",
+        "location": ""
     },
     {
-        "firstName": "Toad"
+        "name": "Todd E.",
+        "photo": "Mario",
+        "about": "",
+        "company": "",
+        "email": "",
+        "telegram": "",
+        "whatsapp": "",
+        "phone": "",
+        "linkedin": "",
+        "tags": "",
+        "notes": "",
+        "location": ""
     },
     {
-        "firstName": "Frog"
+        "name": "Tim L.",
+        "photo": "Mario",
+        "about": "",
+        "company": "",
+        "email": "",
+        "telegram": "",
+        "whatsapp": "",
+        "phone": "",
+        "linkedin": "",
+        "tags": "",
+        "notes": "",
+        "location": ""
     },
     {
-        "firstName": "Turtle"
+        "name": "Samantha C.",
+        "photo": "Mario","about": "",
+        "company": "",
+        "email": "",
+        "telegram": "",
+        "whatsapp": "",
+        "phone": "",
+        "linkedin": "",
+        "tags": "",
+        "notes": "",
+        "location": ""
     },
     {
-        "firstName": "Cow"
+        "name": "Joan A.",
+        "photo": "Mario",
+        "about": "",
+        "company": "",
+        "email": "",
+        "telegram": "",
+        "whatsapp": "",
+        "phone": "",
+        "linkedin": "",
+        "tags": "",
+        "notes": "",
+        "location": ""
     },
     {
-        "firstName": "Dog"
+        "name": "Diana O.",
+        "photo": "Mario",
+        "about": "",
+        "company": "",
+        "email": "",
+        "telegram": "",
+        "whatsapp": "",
+        "phone": "",
+        "linkedin": "",
+        "tags": "",
+        "notes": "",
+        "location": ""
     },
 ]
