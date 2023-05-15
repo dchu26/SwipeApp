@@ -41,3 +41,7 @@
 - v2
     - Cards can be swiped up, down, left, and right
 <img src='http://g.recordit.co/vNTsK5PxP2.gif' title='Demo v2' width='' alt='Demo v2'>
+
+- v3
+    - Cards can be saved and more information about the card can be displayed from the save list
+<img src='http://g.recordit.co/3Vajs3cUYE.gif' title='Demo v3' width='' alt='Demo v3'>
