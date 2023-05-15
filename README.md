@@ -49,4 +49,4 @@
 - v4
     - Full information about the person is displayed in the InfoView
     - More information displayed on the initial CardView
-    - <img src='http://g.recordit.co/76Zk1KRIlp.gif' title='Demo v4' width='' alt='Demo v4'>
+<img src='http://g.recordit.co/76Zk1KRIlp.gif' title='Demo v4' width='' alt='Demo v4'>
