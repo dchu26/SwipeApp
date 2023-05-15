@@ -45,3 +45,7 @@
 - v3
     - Cards can be saved and more information about the card can be displayed from the save list
 <img src='http://g.recordit.co/3Vajs3cUYE.gif' title='Demo v3' width='' alt='Demo v3'>
+- v4
+    - Full information about the person is displayed in the InfoView
+    - More information displayed on the initial CardView
+<img src='http://g.recordit.co/76Zk1KRIlp.gif' title='Demo v4' width'' alt='Demo v4'>
