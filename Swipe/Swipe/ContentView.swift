@@ -167,12 +167,12 @@ struct CardView: View {
             inviteList.append(person)
             print(inviteList)
             //print("\(person) Added")
-            offset = CGSize(width: 0, height: 500)
+            offset = CGSize(width: 0, height: 700)
         }
         //Swiping up, discards
         else if (width > -100 && width < 100 && height < -150 && height > -500){
             //print("\(person) Removed")
-            offset = CGSize(width: 0, height: -500)
+            offset = CGSize(width: 0, height: -700)
         }
         //Defaults to center of the screen, i.e. user does not swipe in an accepted direction
         else{
