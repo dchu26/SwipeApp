@@ -19,7 +19,7 @@ struct Person: Codable {
     var whatsapp: String
     var phone: String
     var linkedin: String
-    var tags: String
+    var tags: [String]
     var notes: String
     var location: String
     

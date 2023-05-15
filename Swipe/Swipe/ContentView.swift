@@ -63,7 +63,7 @@ struct CardView: View {
                     Rectangle()
                     /*Initializes the size of the card
                      */
-                        .frame(width: 360, height: 600)
+                        .frame(width: 400, height: 600)
                         .border(.white, width: 6.0)
                         .cornerRadius(4)
                         .foregroundColor(color.opacity(0.9))
@@ -79,6 +79,17 @@ struct CardView: View {
                             .font(.largeTitle)
                             .foregroundColor(.white)
                             .bold()
+                            .multilineTextAlignment(.center)
+                        Text(person.company)
+                            .font(.title2)
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                        Text(person.about)
+                            .font(.body)
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                            .padding()
                     }
                 }
             //}
@@ -195,6 +206,10 @@ struct ListView: View {
             List(inviteList, id: \.name) { list in
                 NavigationLink(destination: InfoView(p: list), label: {
                     Image(list.photo)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 70, height: 70)
+                        .clipped()
                     VStack(alignment: .leading){
                         Text(list.name)
                     }
@@ -208,8 +223,20 @@ struct ListView: View {
 struct InfoView: View {
     var p: Person
     var body: some View {
-        Image(p.photo)
-        Text(p.name)
+        VStack{
+            Image(p.photo)
+            Text(p.name)
+                .bold()
+            Text("**Company**: \(p.company)")
+            Text("**Location**: \(p.location)" )
+            Text("**Phone**: \(p.phone)")
+            Text("**Email**: \(p.email)")
+            Text("**LinkedIn**: \(p.linkedin)")
+            Text("**WhatsApp**: \(p.whatsapp)")
+            Text("**Telegram**: \(p.telegram)")
+            Text("**Tags**: \(p.tags.joined(separator: ", "))")
+                .multilineTextAlignment(.center)
+        }
     }
 }
 
