@@ -4,6 +4,8 @@
 
 - Initially, there is a deck of cards with profiles on them. You can swipe up to discard the profile, or swipe down to save this profile to a list of people you want to invite. If you want to learn more about the person, you can click the "More..." button and if you want to see your list, you can click the "Saved List" button.
 - You can delete a profile from your saved list by navigating to your saved list and swiping left on the entry that you want to discard, and then press "Delete", which will remove the person from the list.
+- As of right now, the profiles are all coded into a json file in the project and are static, with no API calls or database schema, so the program will work in areas with no internet connectivity. 
+- For a visual demonstration of how the app works, scroll down to the latest version and watch the gif.
 
 ## Project Requirements
 
