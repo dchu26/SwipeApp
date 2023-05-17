@@ -1,4 +1,4 @@
-# Swipe
+# Swipe (iOS)
 
 ## Project Specs and Functionalities
 
