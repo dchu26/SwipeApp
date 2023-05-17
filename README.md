@@ -50,3 +50,8 @@
     - Full information about the person is displayed in the InfoView
     - More information displayed on the initial CardView
 <img src='http://g.recordit.co/76Zk1KRIlp.gif' title='Demo v4' width='' alt='Demo v4'>
+
+- v5
+    - More information can be accessed from the initial CardView
+    - UI updated to look cleaner and more modern
+<img src='http://g.recordit.co/99R8vbfLnQ.gif' title='Demo v5' width='' alt='Demo v5'>
