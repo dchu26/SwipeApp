@@ -257,7 +257,7 @@ struct CardView: View {
         //Swiping down, saves to list, add else if you want to modify swiping left and right actions
         if (width > -100 && width < 100 && height < 500 && height > 150){
             inviteList.append(person)
-            print(inviteList)
+            //print(inviteList)
             //print("\(person) Added")
             offset = CGSize(width: 0, height: 700)
         }
