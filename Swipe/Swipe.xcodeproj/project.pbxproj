@@ -16,6 +16,9 @@
 		551FF60C2A058A23003722F8 /* SwipeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551FF60B2A058A23003722F8 /* SwipeUITestsLaunchTests.swift */; };
 		551FF61B2A09C253003722F8 /* JSONManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551FF61A2A09C253003722F8 /* JSONManager.swift */; };
 		551FF61E2A09C75C003722F8 /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 551FF61D2A09C75C003722F8 /* example.json */; };
+		551FF6282A12EA61003722F8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 551FF6272A12EA61003722F8 /* Launch Screen.storyboard */; };
+		551FF62B2A145ED8003722F8 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 551FF62A2A145ED8003722F8 /* WrappingHStack */; };
+		55A45D632A14A42900921635 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 55A45D622A14A42900921635 /* Introspect */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,7 @@
 		551FF60B2A058A23003722F8 /* SwipeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		551FF61A2A09C253003722F8 /* JSONManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONManager.swift; sourceTree = "<group>"; };
 		551FF61D2A09C75C003722F8 /* example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
+		551FF6272A12EA61003722F8 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				551FF62B2A145ED8003722F8 /* WrappingHStack in Frameworks */,
+				55A45D632A14A42900921635 /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +108,7 @@
 				551FF5F02A058A23003722F8 /* ContentView.swift */,
 				551FF5F22A058A23003722F8 /* Assets.xcassets */,
 				551FF5F42A058A23003722F8 /* Preview Content */,
+				551FF6272A12EA61003722F8 /* Launch Screen.storyboard */,
 			);
 			path = Swipe;
 			sourceTree = "<group>";
@@ -149,6 +156,10 @@
 			dependencies = (
 			);
 			name = Swipe;
+			packageProductDependencies = (
+				551FF62A2A145ED8003722F8 /* WrappingHStack */,
+				55A45D622A14A42900921635 /* Introspect */,
+			);
 			productName = Swipe;
 			productReference = 551FF5EB2A058A23003722F8 /* Swipe.app */;
 			productType = "com.apple.product-type.application";
@@ -221,6 +232,10 @@
 				Base,
 			);
 			mainGroup = 551FF5E22A058A23003722F8;
+			packageReferences = (
+				551FF6292A145ED8003722F8 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
+				55A45D612A14A42900921635 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+			);
 			productRefGroup = 551FF5EC2A058A23003722F8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -239,6 +254,7 @@
 			files = (
 				551FF5F62A058A23003722F8 /* Preview Assets.xcassets in Resources */,
 				551FF5F32A058A23003722F8 /* Assets.xcassets in Resources */,
+				551FF6282A12EA61003722F8 /* Launch Screen.storyboard in Resources */,
 				551FF61E2A09C75C003722F8 /* example.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,6 +446,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -458,6 +475,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -585,6 +603,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		551FF6292A145ED8003722F8 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dkk/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		55A45D612A14A42900921635 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		551FF62A2A145ED8003722F8 /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 551FF6292A145ED8003722F8 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
+		55A45D622A14A42900921635 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55A45D612A14A42900921635 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 551FF5E32A058A23003722F8 /* Project object */;
 }

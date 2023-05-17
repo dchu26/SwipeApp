@@ -22,6 +22,7 @@ struct Person: Codable {
     var tags: [String]
     var notes: String
     var location: String
+    var role: String
     
     //Name of file should be put there
     static let allPeople: [Person] = Bundle.main.decode(file: "example.json")

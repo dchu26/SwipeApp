@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import WrappingHStack
+import Introspect
 
 private var inviteList: [Person] = []
+private var textColor: Color = Color(red: 0.71, green: 0.71, blue: 0.71)
 
 struct ContentView: View {
     
@@ -27,17 +30,21 @@ struct ContentView: View {
                         CardView(person: person)
                     }
                 }
+                
                 //Button to see invite list
                 NavigationLink(destination: ListView()){
                     Text("Saved List")
                 }
-                .background(.blue)
-                .clipShape(Capsule())
+                .font(.system(.body, design: .rounded))
+                .background(Color(red: 0.584, green: 0.373, blue: 1.0))
+                .clipShape(RoundedRectangle(cornerRadius: 5))
                 .foregroundColor(.white)
+                .bold()
                 .buttonStyle(.bordered)
+                .offset(y: 20)
             }
             .padding()
-            
+            .background(Color(red: 0.2, green: 0.2, blue: 0.2))
         }
     }
 }
@@ -49,49 +56,131 @@ struct CardView: View {
     @State private var color: Color = .black
     
     var body: some View {
-        //GeometryReader { geometry in
-            ZStack{
-                //VStack {
+        GeometryReader { geometry in
+        ZStack{
+            //VStack {
+            /*
+             Image("person_1")
+             .resizable()
+             .scaledToFill()
+             .frame(width: geometry.size.width, height: geometry.size.height * 0.75) // 3
+             .clipped()
+             */
+            //Rectangle is where the card itself will be changed
+            RoundedRectangle(cornerRadius: 20)
+            /*Initializes the size of the card
+             */
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .foregroundColor(color)
+            //HStack is where the contents of the card should be displayed
+            VStack {
+                Image(person.photo)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: geometry.size.width/2, height: geometry.size.width/2)
+                    .clipShape(Circle())
+                    .padding()
+                
+                VStack(alignment: .leading) {
+                    Text(person.name)
+                        .font(.system(.title, design: .rounded))
+                        .foregroundColor(.white)
+                        .bold()
+                        .padding(.leading)
+                    Text(person.role)
+                        .font(.system(.body, design: .rounded))
+                        .foregroundColor(textColor)
+                        .padding(.leading)
+                    Text(person.location)
+                        .font(.system(.body, design: .rounded))
+                        .foregroundColor(textColor)
+                        .padding(.leading)
+                        .padding(.bottom)
+                    Text("About")
+                        .font(.system(.title3, design: .rounded))
+                        .foregroundColor(.white)
+                        .bold()
+                        .padding(.leading)
+                    Text(person.about)
+                        .font(.system(.body, design: .rounded))
+                        .foregroundColor(textColor)
+                        .padding(.leading)
+                        .padding(.trailing)
+                        .padding(.bottom)
+                    Text("Company name")
+                        .font(.system(.title3, design: .rounded))
+                        .foregroundColor(.white)
+                        .bold()
+                        .padding(.leading)
+                    Text(person.company)
+                        .font(.system(.body, design: .rounded))
+                        .foregroundColor(textColor)
+                        .padding(.leading)
+                        .padding(.bottom)
+                    Text("Tags")
+                        .font(.system(.body, design: .rounded))
+                        .foregroundColor(.white)
+                        .bold()
+                        .padding(.leading)
+                    
+                    
+                    WrappingHStack{
+                        ForEach(person.tags, id: \.self){ tag in
+                            Text(tag)
+                                .foregroundColor(.white)
+                                .padding(5)
+                                //.fixedSize(horizontal: true, vertical: false)
+                                .overlay(RoundedRectangle(cornerRadius: 3)
+                                    .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                .padding(3)
+                        }
+                    }
+                
+                    
                     /*
-                     Image("person_1")
-                         .resizable()
-                         .scaledToFill()
-                         .frame(width: geometry.size.width, height: geometry.size.height * 0.75) // 3
-                         .clipped()
+                     
+                     WrappingHStack{
+                         ForEach(p.tags, id: \.self){ tag in
+                             Text(tag)
+                                 .foregroundColor(.white)
+                                 .padding(5)
+                                 .fixedSize(horizontal: true, vertical: false)
+                                 .overlay(RoundedRectangle(cornerRadius: 3)
+                                     .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                 .padding(3)
+                         }
+                     }
+
+                     
+                     WrappingHStack{
+                         ForEach(person.tags, id: \.self){ tag in
+                             Text(tag)
+                                 .foregroundColor(.white)
+                                 .padding(3)
+                                 .background(Rectangle().stroke())
+                                 .padding(3)
+                         }
+                     }
                      */
-                    //Rectangle is where the card itself will be changed
-                    Rectangle()
-                    /*Initializes the size of the card
-                     */
-                        .frame(width: 400, height: 600)
-                        .border(.white, width: 6.0)
-                        .cornerRadius(4)
-                        .foregroundColor(color.opacity(0.9))
-                        .shadow(radius: 4)
-                    //HStack is where the contents of the card should be displayed
-                    VStack{
-                        Image(person.photo)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 300, height: 300)
-                            .clipped()
-                        Text(person.name)
-                            .font(.largeTitle)
-                            .foregroundColor(.white)
-                            .bold()
-                            .multilineTextAlignment(.center)
-                        Text(person.company)
-                            .font(.title2)
-                            .foregroundColor(.white)
-                            .multilineTextAlignment(.center)
-                            .padding()
-                        Text(person.about)
-                            .font(.body)
-                            .foregroundColor(.white)
-                            .multilineTextAlignment(.center)
-                            .padding()
+    
+                    HStack {
+                        Spacer()
+                        NavigationLink(destination: InfoView(p: person)){
+                            Text("More...")
+                        }
+                        .bold()
+                        .font(.system(.body, design: .rounded))
+                        .background(Color(red: 0.584, green: 0.373, blue: 1.0))
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                        .foregroundColor(.white)
+                        .buttonStyle(.bordered)
+                        .padding(.trailing)
                     }
                 }
+                .padding(.leading)
+            }
+        }
+    }
             //}
         //}
         //This portion creates the card movement effect; changing the height and width multiplier changes the speed of the swipe effect
@@ -154,6 +243,7 @@ struct CardView: View {
     func swipeCardHandler(width: CGFloat ,height: CGFloat){
         //Cases for handling width and height, defaults to an offset of zero
         
+        /*
         //Swiping left
         if (width < -150 && width > -500 && height < 150 && height > -150){
             offset = CGSize(width: -500, height: 0)
@@ -162,8 +252,10 @@ struct CardView: View {
         else if (width > 150 && width < 500 && height < 150 && height > -150){
             offset = CGSize(width: 500, height: 0)
         }
-        //Swiping down, saves to list
-        else if (width > -100 && width < 100 && height < 500 && height > 150){
+        */
+        
+        //Swiping down, saves to list, add else if you want to modify swiping left and right actions
+        if (width > -100 && width < 100 && height < 500 && height > 150){
             inviteList.append(person)
             print(inviteList)
             //print("\(person) Added")
@@ -203,7 +295,8 @@ struct ListView: View {
         //Where we can see their image and name, click for more info
         //Do not need to make another NavigationView, this is simply here to test the initial view
         //NavigationView {
-            List(inviteList, id: \.name) { list in
+        List{
+            ForEach(inviteList, id: \.name) { list in
                 NavigationLink(destination: InfoView(p: list), label: {
                     Image(list.photo)
                         .resizable()
@@ -212,9 +305,14 @@ struct ListView: View {
                         .clipped()
                     VStack(alignment: .leading){
                         Text(list.name)
+                            .font(.system(.body, design: .rounded))
                     }
                 })
+            }.onDelete{ index in
+                inviteList.remove(atOffsets: index)
             }
+        }
+            .background(Color(red: 0.2, green: 0.2, blue: 0.2))
         //}
     }
 }
@@ -223,20 +321,133 @@ struct ListView: View {
 struct InfoView: View {
     var p: Person
     var body: some View {
-        VStack{
-            Image(p.photo)
-            Text(p.name)
-                .bold()
-            Text("**Company**: \(p.company)")
-            Text("**Location**: \(p.location)" )
-            Text("**Phone**: \(p.phone)")
-            Text("**Email**: \(p.email)")
-            Text("**LinkedIn**: \(p.linkedin)")
-            Text("**WhatsApp**: \(p.whatsapp)")
-            Text("**Telegram**: \(p.telegram)")
-            Text("**Tags**: \(p.tags.joined(separator: ", "))")
-                .multilineTextAlignment(.center)
-        }
+        GeometryReader { geometry in
+            ScrollView {
+                VStack(alignment: .leading){
+                    Image(p.photo)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: geometry.size.width / 2, height: geometry.size.width / 2)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.gray, lineWidth: 1.5))
+                        .offset(x: geometry.size.width / 4)
+                    VStack(alignment: .leading) {
+                        VStack(alignment: .leading) {
+                            Text(p.name)
+                                .font(.system(.title, design: .rounded))
+                                .foregroundColor(.white)
+                                .bold()
+                                .fixedSize(horizontal: false, vertical: true)
+                            
+                            Text(p.role)
+                                .font(.system(.body, design: .rounded))
+                                .foregroundColor(textColor)
+                                .fixedSize(horizontal: false, vertical: true)
+                            
+                            Text(p.location)
+                                .font(.system(.body, design: .rounded))
+                                .foregroundColor(textColor)
+                                .padding(.bottom)
+                                .fixedSize(horizontal: false, vertical: true)
+                            
+                            Text("About")
+                                .font(.system(.title3, design: .rounded))
+                                .foregroundColor(.white)
+                                .bold()
+                            
+                            Text(p.about)
+                                .font(.system(.body, design: .rounded))
+                                .foregroundColor(textColor)
+                                .padding(.bottom)
+                                .multilineTextAlignment(.leading)
+                            //Necessary for making the interpreter not collapse the text
+                                .fixedSize(horizontal: false, vertical: true)
+                            
+                            Text("Company name")
+                                .font(.system(.title3, design: .rounded))
+                                .foregroundColor(.white)
+                                .bold()
+                            
+                            Text(p.company)
+                                .font(.system(.body, design: .rounded))
+                                .foregroundColor(textColor)
+                                .padding(.bottom)
+                                .fixedSize(horizontal: false, vertical: true)
+                            
+                            Text("Socials")
+                                .font(.system(.title3, design: .rounded))
+                                .foregroundColor(.white)
+                                .bold()
+                        }
+                        
+                        WrappingHStack{
+                            Text(p.phone)
+                                .font(.system(.body, design: .rounded))
+                                .foregroundColor(.white)
+                                .padding(5)
+                                .fixedSize(horizontal: true, vertical: false)
+                                .overlay(RoundedRectangle(cornerRadius: 3)
+                                    .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                .padding(3)
+                            Text(p.email)
+                                .font(.system(.body, design: .rounded))
+                                .foregroundColor(.white)
+                                .padding(5)
+                                .fixedSize(horizontal: true, vertical: false)
+                                .overlay(RoundedRectangle(cornerRadius: 3)
+                                    .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                .padding(3)
+                            Text(p.linkedin)
+                                .font(.system(.body, design: .rounded))
+                                .foregroundColor(.white)
+                                .padding(5)
+                                .fixedSize(horizontal: true, vertical: false)
+                                .overlay(RoundedRectangle(cornerRadius: 3)
+                                    .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                .padding(3)
+                            Text(p.whatsapp)
+                                .font(.system(.body, design: .rounded))
+                                .foregroundColor(.white)
+                                .padding(5)
+                                .fixedSize(horizontal: true, vertical: false)
+                                .overlay(RoundedRectangle(cornerRadius: 3)
+                                    .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                .padding(3)
+                            Text(p.telegram)
+                                .font(.system(.body, design: .rounded))
+                                .foregroundColor(.white)
+                                .padding(5)
+                                .fixedSize(horizontal: true, vertical: false)
+                                .overlay(RoundedRectangle(cornerRadius: 3)
+                                    .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                .padding(3)
+                            }
+                        }
+                            
+                        Text("Tags")
+                            .font(.system(.title3, design: .rounded))
+                            .foregroundColor(.white)
+                            .bold()
+                    
+                        Spacer()
+                    
+                        WrappingHStack{
+                            ForEach(p.tags, id: \.self){ tag in
+                                Text(tag)
+                                    .foregroundColor(.white)
+                                    .padding(5)
+                                    //.fixedSize(horizontal: true, vertical: false)
+                                    .overlay(RoundedRectangle(cornerRadius: 3)
+                                        .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                    .padding(3)
+                                    
+                            }
+                        }
+                    }
+                }
+            .padding(.leading)
+            }
+        .background(.black)
     }
 }
 
@@ -268,4 +479,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
