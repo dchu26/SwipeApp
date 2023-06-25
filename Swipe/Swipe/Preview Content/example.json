@@ -164,4 +164,34 @@
         "location": "Beijing China",
         "role": "Principal at Atypical Ventures"
     },
+    {
+        "name": "Julija Bainiaksina",
+        "photo": "Julija_Bainiaksina",
+        "about": "Co-founder of Networky.co (SygnalXYZ) | PhD in AI & Machine Learning | Web3 | Featured on CNBC, Bloomberg, BBC | NLP enthusiast | We're hiring!",
+        "company": "Networky.co (SyngalXYZ)",
+        "email": "julijabainiaksina@fakemail.com",
+        "telegram": "julijabainiaksina",
+        "whatsapp": "julijabainiaksina",
+        "phone": "(123) 456-7890",
+        "linkedin": "https://www.linkedin.com/in/julija-bainiaksina-phd-a906764a/",
+        "tags": ["#entrepreneurs", "#venturecapital", "#cloud", "#AI", "#bigdata, #web3"],
+        "notes": "",
+        "location": "United Kingdom",
+        "role": "Co-Founder of Networky.co (SyngalXYZ)"
+    },
+    {
+        "name": "Tess Hau",
+        "photo": "Tess_Hau",
+        "about": "Venture Capitalist | Founder | LP | Investor | Marketplace | SAAS | Web3 | Gaming | Artificial Intelligence | Generative Ai | Metaverse | DeFi | Advisor | Mentor Capitalist",
+        "company": "Tess Ventures",
+        "email": "tesshau@fakemail.com",
+        "telegram": "tesshau",
+        "whatsapp": "tesshau",
+        "phone": "(123) 456-7890",
+        "linkedin": "https://www.linkedin.com/in/tesshau/",
+        "tags": ["#entrepreneurs", "#venturecapital", "#cloud", "#AI", "#bigdata, #web3, #investor"],
+        "notes": "",
+        "location": "Palo Alto, California, United States",
+        "role": "Founder at Tess Ventures"
+    },
 ]
