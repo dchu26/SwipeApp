@@ -62,3 +62,8 @@
     - More information can be accessed from the initial CardView
     - UI updated to look cleaner and more modern
 <img src='http://g.recordit.co/99R8vbfLnQ.gif' title='Demo v5' width='' alt='Demo v5'>
+
+- v6
+    - Implemented initial design of match view 
+    - Can iterated through the matches, but no true logic added
+<img src='http://g.recordit.co/aTA6Ejpac5.gif' title='Demo v5' width='' alt='Demo v6'>
