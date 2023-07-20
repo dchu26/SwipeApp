@@ -27,9 +27,16 @@ struct Person: Codable {
     //Name of file should be put there
     static let allPeople: [Person] = Bundle.main.decode(file: "example.json")
     
+    static let matches: [Person] = Bundle.main.decode(file: "example2.json")
+    
     //For sample preview
     static let samplePerson: Person = allPeople[0]
-
+    
+    //Quick check if both Persons are the same
+    static func == (lhs: Person, rhs: Person) -> Bool {
+        return lhs.email == rhs.email && lhs.name == rhs.name && lhs.telegram == rhs.telegram
+    }
+    
 }
 
 

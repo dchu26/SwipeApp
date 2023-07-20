@@ -13,7 +13,6 @@ private var inviteList: [Person] = []
 private var textColor: Color = Color(red: 0.71, green: 0.71, blue: 0.71)
 
 struct ContentView: View {
-    
     //Temporarily using an array of strings as placeholders, will change later to accommodate for data to be read
     
     //private var people: [String] = ["One", "Two", "Three", "Four", "Five"].reversed()
@@ -30,21 +29,62 @@ struct ContentView: View {
                         CardView(person: person)
                     }
                 }
-                
-                //Button to see invite list
-                NavigationLink(destination: ListView()){
-                    Text("Saved List")
+                HStack {
+                    //Button to see matches
+                    NavigationLink(destination: MatchContainerView()){
+                        Text("Matches")
+                    }
+                    .font(.system(.body, design: .rounded))
+                    // Purple color button
+                    .background(Color(red: 0.584, green: 0.373, blue: 1.0))
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                    .foregroundColor(.white)
+                    .bold()
+                    .buttonStyle(.bordered)
+                    .offset(y: 20)
+                    
+                    //Button to see invite list
+                    NavigationLink(destination: ListView()){
+                        Text("Saved List")
+                    }
+                    .font(.system(.body, design: .rounded))
+                    // Purple color button
+                    .background(Color(red: 0.584, green: 0.373, blue: 1.0))
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                    .foregroundColor(.white)
+                    .bold()
+                    .buttonStyle(.bordered)
+                    .offset(y: 20)
                 }
-                .font(.system(.body, design: .rounded))
-                .background(Color(red: 0.584, green: 0.373, blue: 1.0))
-                .clipShape(RoundedRectangle(cornerRadius: 5))
-                .foregroundColor(.white)
-                .bold()
-                .buttonStyle(.bordered)
-                .offset(y: 20)
             }
             .padding()
+            // Gray
             .background(Color(red: 0.2, green: 0.2, blue: 0.2))
+        }
+    }
+}
+
+struct MatchContainerView: View {
+    
+    private var people: [Person] = Person.matches
+    @State private var currentIndex = 0
+    
+    var body: some View {
+        //NavigationView for the entire screen
+        GeometryReader { geometry in
+            NavigationView {
+                VStack {
+                    ZStack{
+                        //Makes a cardView for each person in the list of people
+                        if currentIndex < people.count{
+                            MatchView(p: people[currentIndex], currentIndex: $currentIndex)
+                        }
+                        else {
+                            Text("No more matches!")
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -131,6 +171,7 @@ struct CardView: View {
                                 .padding(5)
                                 //.fixedSize(horizontal: true, vertical: false)
                                 .overlay(RoundedRectangle(cornerRadius: 3)
+                                         // purple
                                     .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
                                 .padding(3)
                         }
@@ -170,6 +211,7 @@ struct CardView: View {
                         }
                         .bold()
                         .font(.system(.body, design: .rounded))
+                        // Purple
                         .background(Color(red: 0.584, green: 0.373, blue: 1.0))
                         .clipShape(RoundedRectangle(cornerRadius: 5))
                         .foregroundColor(.white)
@@ -240,7 +282,7 @@ struct CardView: View {
     */
     
     //Function for handling the swiping of the card in 4 directions
-    func swipeCardHandler(width: CGFloat ,height: CGFloat){
+    func swipeCardHandler(width: CGFloat, height: CGFloat){
         //Cases for handling width and height, defaults to an offset of zero
         
         /*
@@ -324,13 +366,16 @@ struct InfoView: View {
         GeometryReader { geometry in
             ScrollView {
                 VStack(alignment: .leading){
-                    Image(p.photo)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: geometry.size.width / 2, height: geometry.size.width / 2)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.gray, lineWidth: 1.5))
-                        .offset(x: geometry.size.width / 4)
+                    HStack{
+                        Spacer()
+                        Image(p.photo)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: geometry.size.width / 1.5, height: geometry.size.width / 1.5)
+                            .clipShape(Circle())
+                        //.offset(x: geometry.size.width / 5)
+                        Spacer()
+                    }
                     VStack(alignment: .leading) {
                         VStack(alignment: .leading) {
                             Text(p.name)
@@ -423,8 +468,8 @@ struct InfoView: View {
                                 .padding(3)
                             }
                         }
-                            
-                        Text("Tags")
+                    
+                            Text("Tags")
                             .font(.system(.title3, design: .rounded))
                             .foregroundColor(.white)
                             .bold()
@@ -440,7 +485,7 @@ struct InfoView: View {
                                     .overlay(RoundedRectangle(cornerRadius: 3)
                                         .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
                                     .padding(3)
-                                    
+    
                             }
                         }
                     }
@@ -450,6 +495,180 @@ struct InfoView: View {
         .background(.black)
     }
 }
+
+
+//View for MatchView
+struct MatchView: View {
+    var p: Person
+    @Binding var currentIndex: Int
+    var body: some View {
+        GeometryReader { geometry in
+            VStack {
+                ScrollView {
+                    VStack(alignment: .leading){
+                        Image(p.photo)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: geometry.size.width-30)
+                            .clipShape(Rectangle())
+                        VStack(alignment: .leading) {
+                            VStack(alignment: .leading) {
+                                Text(p.name)
+                                    .font(.system(.title, design: .rounded))
+                                    .foregroundColor(.white)
+                                    .bold()
+                                    .fixedSize(horizontal: false, vertical: true)
+                                
+                                Text(p.role)
+                                    .font(.system(.body, design: .rounded))
+                                    .foregroundColor(textColor)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                
+                                Text(p.location)
+                                    .font(.system(.body, design: .rounded))
+                                    .foregroundColor(textColor)
+                                    .padding(.bottom)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                
+                                Text("About")
+                                    .font(.system(.title3, design: .rounded))
+                                    .foregroundColor(.white)
+                                    .bold()
+                                
+                                Text(p.about)
+                                    .font(.system(.body, design: .rounded))
+                                    .foregroundColor(textColor)
+                                    .padding(.bottom)
+                                    .multilineTextAlignment(.leading)
+                                //Necessary for making the interpreter not collapse the text
+                                    .fixedSize(horizontal: false, vertical: true)
+                                
+                                Text("Company name")
+                                    .font(.system(.title3, design: .rounded))
+                                    .foregroundColor(.white)
+                                    .bold()
+                                
+                                Text(p.company)
+                                    .font(.system(.body, design: .rounded))
+                                    .foregroundColor(textColor)
+                                    .padding(.bottom)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                
+                                Text("Socials")
+                                    .font(.system(.title3, design: .rounded))
+                                    .foregroundColor(.white)
+                                    .bold()
+                            }
+                            
+                            WrappingHStack{
+                                Text(p.phone)
+                                    .font(.system(.body, design: .rounded))
+                                    .foregroundColor(.white)
+                                    .padding(5)
+                                    .fixedSize(horizontal: true, vertical: false)
+                                    .overlay(RoundedRectangle(cornerRadius: 3)
+                                        .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                    .padding(3)
+                                Text(p.email)
+                                    .font(.system(.body, design: .rounded))
+                                    .foregroundColor(.white)
+                                    .padding(5)
+                                    .fixedSize(horizontal: true, vertical: false)
+                                    .overlay(RoundedRectangle(cornerRadius: 3)
+                                        .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                    .padding(3)
+                                Text(p.linkedin)
+                                    .font(.system(.body, design: .rounded))
+                                    .foregroundColor(.white)
+                                    .padding(5)
+                                    .fixedSize(horizontal: true, vertical: false)
+                                    .overlay(RoundedRectangle(cornerRadius: 3)
+                                        .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                    .padding(3)
+                                Text(p.whatsapp)
+                                    .font(.system(.body, design: .rounded))
+                                    .foregroundColor(.white)
+                                    .padding(5)
+                                    .fixedSize(horizontal: true, vertical: false)
+                                    .overlay(RoundedRectangle(cornerRadius: 3)
+                                        .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                    .padding(3)
+                                Text(p.telegram)
+                                    .font(.system(.body, design: .rounded))
+                                    .foregroundColor(.white)
+                                    .padding(5)
+                                    .fixedSize(horizontal: true, vertical: false)
+                                    .overlay(RoundedRectangle(cornerRadius: 3)
+                                        .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                    .padding(3)
+                            }
+                        }
+                        
+                        Text("Tags")
+                            .font(.system(.title3, design: .rounded))
+                            .foregroundColor(.white)
+                            .bold()
+                        
+                        Spacer()
+                        
+                        WrappingHStack{
+                            ForEach(p.tags, id: \.self){ tag in
+                                Text(tag)
+                                    .foregroundColor(.white)
+                                    .padding(5)
+                                //.fixedSize(horizontal: true, vertical: false)
+                                    .overlay(RoundedRectangle(cornerRadius: 3)
+                                        .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                    .padding(3)
+                            }
+                        }
+                    }
+                }
+                .padding(.leading)
+                HStack(spacing: geometry.size.width/4){
+                    
+                    Button(action: {
+                        // Action for the first button
+                        print("First Button Tapped")
+                        currentIndex = (currentIndex + 1) //% 3
+                        
+                    }) {
+                        Text("Reject")
+                            .padding()
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                            .offset(y: geometry.size.width/40)
+                    }
+                    Button(action: {
+                        // Action for the second button
+                        print("Matched")
+                        currentIndex = (currentIndex + 1) //% 3
+                        
+                    }) {
+                        Text("Match")
+                            .padding()
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                            .offset(y: geometry.size.width/40)
+                    }
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height/6)
+                .background(Color(red: 0.2, green: 0.2, blue: 0.2))
+            }
+            .background(.black)
+        }
+    }
+}
+
+//Preview
+struct MatchView_Previews: PreviewProvider {
+    static var previews: some View {
+        MatchContainerView()
+    }
+}
+ 
 
 //Preview
 struct InfoView_Previews: PreviewProvider {

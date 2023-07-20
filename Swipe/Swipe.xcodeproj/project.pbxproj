@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		551A55472A6975E200273805 /* example2.json in Resources */ = {isa = PBXBuildFile; fileRef = 551A55462A6975E200273805 /* example2.json */; };
 		551FF5EF2A058A23003722F8 /* SwipeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551FF5EE2A058A23003722F8 /* SwipeApp.swift */; };
 		551FF5F12A058A23003722F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551FF5F02A058A23003722F8 /* ContentView.swift */; };
 		551FF5F32A058A23003722F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 551FF5F22A058A23003722F8 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		551A55462A6975E200273805 /* example2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example2.json; sourceTree = "<group>"; };
 		551FF5EB2A058A23003722F8 /* Swipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		551FF5EE2A058A23003722F8 /* SwipeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeApp.swift; sourceTree = "<group>"; };
 		551FF5F02A058A23003722F8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				551FF61D2A09C75C003722F8 /* example.json */,
+				551A55462A6975E200273805 /* example2.json */,
 				551FF61A2A09C253003722F8 /* JSONManager.swift */,
 				551FF5F52A058A23003722F8 /* Preview Assets.xcassets */,
 			);
@@ -254,6 +257,7 @@
 			files = (
 				551FF5F62A058A23003722F8 /* Preview Assets.xcassets in Resources */,
 				551FF5F32A058A23003722F8 /* Assets.xcassets in Resources */,
+				551A55472A6975E200273805 /* example2.json in Resources */,
 				551FF6282A12EA61003722F8 /* Launch Screen.storyboard in Resources */,
 				551FF61E2A09C75C003722F8 /* example.json in Resources */,
 			);
