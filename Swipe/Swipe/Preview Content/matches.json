@@ -1,0 +1,48 @@
+[
+    {
+        "name": "Calvin Zhou",
+        "photo": "calvin_zhou",
+        "about": "CBO | Building Shrapnel, a AAA First-Person Shooter enabling community created maps and content, leveraging blockchain technology.",
+        "company": "tokentus investment AG",
+        "email": "calvinzhou@fakemail.com",
+        "telegram": "calvinzhou",
+        "whatsapp": "calvinzhou",
+        "phone": "(123) 456-7890",
+        "linkedin": "https://www.linkedin.com/in/calvinzhou86/",
+        "tags": ["Founder", "UGC", "Venture Capital", "Blockchain", "Gaming"],
+        "notes": "",
+        "location": "United States",
+        "role" : "Co-Founder"
+    },
+    {
+        "name": "Christopher Cuong T. Nguyen",
+        "photo": "Christopher_Cuong_T_Nguyen",
+        "about": "Engineering the Industrial Brain. Hacker, Builder/Founder w/ successful exits, Professor http://bit.ly/scholar-ctn Knowledge-First ML Creator @h1st_ai, ex-GoogleApps",
+        "company": "Aitomatic, Inc",
+        "email": "ctn@fakemail.com",
+        "telegram": "ctn",
+        "whatsapp": "ctn",
+        "phone": "(123) 456-7890",
+        "linkedin": "https://www.linkedin.com/in/ctnguyen/",
+        "tags": ["Founder", "ML & AI", "Hacker", "Statistics", "Finance"],
+        "notes": "",
+        "location": "Los Altos, California, United States",
+        "role" : "CEO & Co-Founder at Aitomatic, Inc"
+    },
+    {
+        "name": "Julija Bainiaksina",
+        "photo": "Julija_Bainiaksina",
+        "about": "Co-founder of Networky.co (SygnalXYZ) | PhD in AI & Machine Learning | Web3 | Featured on CNBC, Bloomberg, BBC | NLP enthusiast",
+        "company": "Networky.co (SyngalXYZ)",
+        "email": "julijabainiaksina@fakemail.com",
+        "telegram": "julijabainiaksina",
+        "whatsapp": "julijabainiaksina",
+        "phone": "(123) 456-7890",
+        "linkedin": "https://www.linkedin.com/in/julija-bainiaksina-phd-a906764a/",
+        "tags": ["Founder", "ML & AI", "NLP, Web3"],
+        "notes": "",
+        "location": "United Kingdom",
+        "role": "Co-Founder of Networky.co (SyngalXYZ)"
+    }
+]
+
