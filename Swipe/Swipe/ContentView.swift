@@ -10,9 +10,158 @@ import WrappingHStack
 import Introspect
 
 private var inviteList: [Person] = []
+private var matchList: [Person] = []
 private var textColor: Color = Color(red: 0.71, green: 0.71, blue: 0.71)
+private var user: User = User()
 
 struct ContentView: View {
+    
+    struct Question {
+        let id: UUID
+        let questionText: String
+        var options: [String]
+        var selectedOptionIndex: Int?
+    }
+    
+    private var gray: Color = Color(red: 0.5, green: 0.5, blue: 0.5)
+    
+    @State private var isResultViewPresented = false
+    
+    @State private var currentIndex = 0
+    
+    @State private var textScreen = true
+    
+    @StateObject private var newUser = user
+    
+    @State private var questions: [Question] = [
+            Question(id: UUID(), questionText: "What skillset are you looking to learn about?", options: ["Analytics / Data", "Establishing Partnerships", "Community Building", "Design", "Engineering", "Finance", "Fundraising", "Legal"], selectedOptionIndex: nil),
+            Question(id: UUID(), questionText: "What skillset do you possess?", options: ["Analytics / Data", "Establishing Partnerships", "Community Building", "Design", "Engineering", "Finance", "Fundraising", "Legal"], selectedOptionIndex: nil),
+            Question(id: UUID(), questionText: "What best describes where you're at?", options: ["Undergrad", "Masters Student", "1-5 Years Post Grad", "5-9 Years Post Grad", "10+ Years Post Grad"], selectedOptionIndex: nil),
+            
+            
+        ]
+    
+    private func updateSelectedOption(questionIndex: Int, optionIndex: Int) {
+            questions[questionIndex].selectedOptionIndex = optionIndex
+        }
+    
+    var body: some View {
+        NavigationStack {
+            GeometryReader { geometry in
+                VStack{
+                    if textScreen == true{
+                        Text("Welcome to Networky.co! 👋")
+                            .font(.system(size: 25))
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                        Text("Let's get the basics out of the way...")
+                            .font(.system(size: 20))
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 30)
+                        Text("What is your first name?")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                        
+                        TextField("First name", text: $newUser.firstName)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle()) // Optional: Applies a rounded border around the text field
+                                        .padding()
+                        Text("What is your last name?")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                        
+                        TextField("Last name", text: $newUser.lastName)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle()) // Optional: Applies a rounded border around the text field
+                                        .padding()
+                    }
+                    else {
+                    Text(questions[currentIndex].questionText)
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                    
+                        ForEach(questions[currentIndex].options.indices, id: \.self) { optionIndex in
+                            MultipleChoiceButton(label: questions[currentIndex].options[optionIndex], selected: Binding(
+                                get: { questions[currentIndex].selectedOptionIndex == optionIndex },
+                                set: { newValue in
+                                    if newValue {
+                                        updateSelectedOption(questionIndex: currentIndex, optionIndex: optionIndex)
+                                    } else {
+                                        questions[currentIndex].selectedOptionIndex = nil
+                                    }
+                                })
+                            )
+                        }
+                    }
+                    
+                    NavigationLink(destination: MainView()){
+                        Button("Submit") {
+                            // Handle the user's selected options here
+                            //print("Selected Questions: \(questions)")
+                            if textScreen == true && newUser.firstName != "" && newUser.lastName != ""{
+                                textScreen = false
+                            }
+                            else if currentIndex == questions.count - 1 && questions[currentIndex].selectedOptionIndex != nil{
+                                isResultViewPresented = true
+                            }
+                            else if questions[currentIndex].selectedOptionIndex != nil{
+                                currentIndex += 1
+                            }
+                        }
+                        .navigationBarHidden(true)
+                        .padding()
+                        // Set the text color to white
+                        .foregroundColor(.white)
+                        // Set the background color of the button
+                        .background(Color(red: 0.584, green: 0.373, blue: 1.0))
+                        // Apply corner radius to the button
+                        .cornerRadius(10)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                            // Add a border around the button
+                                .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2)
+                        )
+                        .navigationDestination(isPresented: $isResultViewPresented) {
+                            MainView()
+                        }
+                    }
+                }
+            }
+            .padding()
+            // Gray
+            .background(Color(red: 0.2, green: 0.2, blue: 0.2))
+        }
+    }
+}
+
+struct MultipleChoiceButton: View {
+    var label: String
+    @Binding var selected: Bool
+    
+    var body: some View {
+        Button(action: {
+            self.selected.toggle()
+        }) {
+            HStack {
+                Image(systemName: selected ? "checkmark.circle.fill" : "circle")
+                Text(label)
+                    .foregroundColor(.white)
+            }
+            .foregroundColor(selected ? .green : .primary)
+            .padding(6)
+            .background(
+                RoundedRectangle(cornerRadius: 3) // Adjust the corner radius as needed
+                    .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 4) // You can customize the color and line width
+                    .background(Color(red: 0.584, green: 0.373, blue: 1.0))
+            )
+        }
+        .padding()
+    }
+}
+
+struct MainView: View{
     //Temporarily using an array of strings as placeholders, will change later to accommodate for data to be read
     
     //private var people: [String] = ["One", "Two", "Three", "Four", "Five"].reversed()
@@ -43,9 +192,24 @@ struct ContentView: View {
                     .buttonStyle(.bordered)
                     .offset(y: 20)
                     
-                    //Button to see invite list
+                    //Button to see saved list
                     NavigationLink(destination: ListView()){
                         Text("Saved List")
+                    }
+                    .font(.system(.body, design: .rounded))
+                    // Purple color button
+                    .background(Color(red: 0.584, green: 0.373, blue: 1.0))
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                    .foregroundColor(.white)
+                    .bold()
+                    .buttonStyle(.bordered)
+                    .offset(y: 20)
+                    
+                    //Button to edit profileText("First name")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    NavigationLink(destination: ProfileView()){
+                        Text("Profile")
                     }
                     .font(.system(.body, design: .rounded))
                     // Purple color button
@@ -61,6 +225,46 @@ struct ContentView: View {
             // Gray
             .background(Color(red: 0.2, green: 0.2, blue: 0.2))
         }
+        // Important to remove navigation bar to prevent navigation back to multiple choice screen
+        .navigationBarHidden(true)
+    }
+}
+
+struct ProfileView: View {
+    
+    @StateObject private var userInfo = user
+    
+    var body: some View {
+        GeometryReader { geometry in
+            VStack {
+                Image("default_profile")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: geometry.size.width/2, height: geometry.size.width/2)
+                    .clipShape(Circle())
+                    .padding()
+                Text("First name")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                TextField("First name", text: $userInfo.firstName)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                Text("Last name")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                TextField("Last name", text: $userInfo.lastName)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                Text("Bio")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                TextField("Bio", text: $userInfo.bio)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                Spacer()
+            }
+        }
+        .background(Color(red: 0.2, green: 0.2, blue: 0.2))
     }
 }
 
@@ -176,33 +380,6 @@ struct CardView: View {
                                 .padding(3)
                         }
                     }
-                
-                    
-                    /*
-                     
-                     WrappingHStack{
-                         ForEach(p.tags, id: \.self){ tag in
-                             Text(tag)
-                                 .foregroundColor(.white)
-                                 .padding(5)
-                                 .fixedSize(horizontal: true, vertical: false)
-                                 .overlay(RoundedRectangle(cornerRadius: 3)
-                                     .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
-                                 .padding(3)
-                         }
-                     }
-
-                     
-                     WrappingHStack{
-                         ForEach(person.tags, id: \.self){ tag in
-                             Text(tag)
-                                 .foregroundColor(.white)
-                                 .padding(3)
-                                 .background(Rectangle().stroke())
-                                 .padding(3)
-                         }
-                     }
-                     */
     
                     HStack {
                         Spacer()
@@ -629,7 +806,7 @@ struct MatchView: View {
                     
                     Button(action: {
                         // Action for the first button
-                        print("First Button Tapped")
+                        //print("First Button Tapped")
                         currentIndex = (currentIndex + 1) //% 3
                         
                     }) {
@@ -642,8 +819,10 @@ struct MatchView: View {
                     }
                     Button(action: {
                         // Action for the second button
-                        print("Matched")
+                        //print("Matched")
                         currentIndex = (currentIndex + 1) //% 3
+                        matchList.append(p)
+                        //print(matchList)
                         
                     }) {
                         Text("Match")
@@ -661,6 +840,14 @@ struct MatchView: View {
         }
     }
 }
+
+//Preview
+struct ProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileView()
+    }
+}
+ 
 
 //Preview
 struct MatchView_Previews: PreviewProvider {
@@ -696,5 +883,12 @@ struct CardView_Previews: PreviewProvider {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+//Preview
+struct MainView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainView()
     }
 }
