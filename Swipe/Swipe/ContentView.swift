@@ -111,17 +111,17 @@ struct ContentView: View {
                             }
                         }
                         .navigationBarHidden(true)
-                        .padding()
+                        .padding(7)
                         // Set the text color to white
-                        .foregroundColor(.white)
+                        .foregroundColor(.black)
                         // Set the background color of the button
-                        .background(Color(red: 0.584, green: 0.373, blue: 1.0))
+                        .background(Color(red: 0, green: 1, blue: 1))
                         // Apply corner radius to the button
                         .cornerRadius(10)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
                             // Add a border around the button
-                                .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2)
+                                .stroke(Color(red: 0, green: 1, blue: 1), lineWidth: 2)
                         )
                         .navigationDestination(isPresented: $isResultViewPresented) {
                             MainView()
@@ -141,23 +141,28 @@ struct MultipleChoiceButton: View {
     @Binding var selected: Bool
     
     var body: some View {
-        Button(action: {
-            self.selected.toggle()
-        }) {
-            HStack {
-                Image(systemName: selected ? "checkmark.circle.fill" : "circle")
-                Text(label)
-                    .foregroundColor(.white)
+        GeometryReader { geometry in
+            Button(action: {
+                self.selected.toggle()
+            }) {
+                HStack {
+                    Image(systemName: selected ? "checkmark.circle.fill" : "circle")
+                    //.position(x: geometry.size.width/15, y: geometry.size.height/5)
+                    Text(label)
+                        .foregroundColor(.white)
+                        .padding(.leading)
+                }
+                .foregroundColor(selected ? .green : .primary)
+                .padding(6)
+                .frame(width: geometry.size.width-33)
+                .background(
+                    RoundedRectangle(cornerRadius: 3) // Adjust the corner radius as needed
+                        .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 4) // You can customize the color and line width
+                        .background(Color(red: 0.584, green: 0.373, blue: 1.0))
+                )
             }
-            .foregroundColor(selected ? .green : .primary)
-            .padding(6)
-            .background(
-                RoundedRectangle(cornerRadius: 3) // Adjust the corner radius as needed
-                    .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 4) // You can customize the color and line width
-                    .background(Color(red: 0.584, green: 0.373, blue: 1.0))
-            )
+            .padding()
         }
-        .padding()
     }
 }
 
