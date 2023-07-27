@@ -66,4 +66,9 @@
 - v6
     - Implemented initial design of match view 
     - Can iterated through the matches, but no true logic added
-<img src='http://g.recordit.co/aTA6Ejpac5.gif' title='Demo v5' width='' alt='Demo v6'>
+<img src='http://g.recordit.co/aTA6Ejpac5.gif' title='Demo v6' width='' alt='Demo v6'>
+
+- v7
+    - Added intro questions, including asking for name and skillsets
+    - Can edit profile by clicking profile
+<img src='http://g.recordit.co/06b3EQciTl.gif' title='Demo v7' width='' alt='Demo v7'>
