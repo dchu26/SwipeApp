@@ -136,6 +136,46 @@ struct ContentView: View {
     }
 }
 
+struct CalendarView: View {
+    
+    @State var currentDate: Date = Date()
+    
+    var body: some View {
+        ScrollView(.vertical, showsIndicators: false){
+            VStack(spacing: 20){
+                CalendarDate(currentDate: $currentDate)
+            }
+            .padding(.vertical)
+        }
+        .safeAreaInset(edge: .bottom){
+            HStack {
+                Button {
+                    
+                } label: {
+                    Text("Schedule Meeting")
+                        .fontWeight(.bold)
+                        .padding(.vertical)
+                        .frame(maxWidth: .infinity)
+                        .background(Color(red: 0.584, green: 0.373, blue: 1.0), in: Capsule())
+                }
+                Button {
+                    
+                } label: {
+                    Text("Add Reminder")
+                        .fontWeight(.bold)
+                        .padding(.vertical)
+                        .frame(maxWidth: .infinity)
+                        .background(Color(red: 0.584, green: 0.373, blue: 1.0), in: Capsule())
+                }
+            }
+            .padding(.horizontal)
+            .padding(.top, 10)
+            .foregroundColor(.white)
+            .background(.ultraThinMaterial)
+        }
+    }
+}
+
 struct MultipleChoiceButton: View {
     var label: String
     @Binding var selected: Bool
@@ -241,35 +281,37 @@ struct ProfileView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack {
-                Image("default_profile")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: geometry.size.width/2, height: geometry.size.width/2)
-                    .clipShape(Circle())
-                    .padding()
-                Text("First name")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                TextField("First name", text: $userInfo.firstName)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                Text("Last name")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                TextField("Last name", text: $userInfo.lastName)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                Text("Bio")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                TextField("Bio", text: $userInfo.bio)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                Spacer()
+            ScrollView {
+                VStack {
+                    Image("default_profile")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geometry.size.width/2, height: geometry.size.width/2)
+                        .clipShape(Circle())
+                        .padding()
+                    Text("First name")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    TextField("First name", text: $userInfo.firstName)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding()
+                    Text("Last name")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    TextField("Last name", text: $userInfo.lastName)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding()
+                    Text("Bio")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    TextField("Bio", text: $userInfo.bio)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding()
+                    Spacer()
+                }
             }
+            .background(Color(red: 0.2, green: 0.2, blue: 0.2))
         }
-        .background(Color(red: 0.2, green: 0.2, blue: 0.2))
     }
 }
 
@@ -683,165 +725,168 @@ struct InfoView: View {
 struct MatchView: View {
     var p: Person
     @Binding var currentIndex: Int
+    @State private var isCalendarPresented = false
     var body: some View {
-        GeometryReader { geometry in
-            VStack {
-                ScrollView {
-                    VStack(alignment: .leading){
-                        Image(p.photo)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: geometry.size.width-30)
-                            .clipShape(Rectangle())
-                        VStack(alignment: .leading) {
+        NavigationView{
+            GeometryReader { geometry in
+                VStack {
+                    ScrollView {
+                        VStack(alignment: .leading){
+                            Image(p.photo)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: geometry.size.width-30)
+                                .clipShape(Rectangle())
                             VStack(alignment: .leading) {
-                                Text(p.name)
-                                    .font(.system(.title, design: .rounded))
-                                    .foregroundColor(.white)
-                                    .bold()
-                                    .fixedSize(horizontal: false, vertical: true)
+                                VStack(alignment: .leading) {
+                                    Text(p.name)
+                                        .font(.system(.title, design: .rounded))
+                                        .foregroundColor(.white)
+                                        .bold()
+                                        .fixedSize(horizontal: false, vertical: true)
+                                    
+                                    Text(p.role)
+                                        .font(.system(.body, design: .rounded))
+                                        .foregroundColor(textColor)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                    
+                                    Text(p.location)
+                                        .font(.system(.body, design: .rounded))
+                                        .foregroundColor(textColor)
+                                        .padding(.bottom)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                    
+                                    Text("About")
+                                        .font(.system(.title3, design: .rounded))
+                                        .foregroundColor(.white)
+                                        .bold()
+                                    
+                                    Text(p.about)
+                                        .font(.system(.body, design: .rounded))
+                                        .foregroundColor(textColor)
+                                        .padding(.bottom)
+                                        .multilineTextAlignment(.leading)
+                                    //Necessary for making the interpreter not collapse the text
+                                        .fixedSize(horizontal: false, vertical: true)
+                                    
+                                    Text("Company name")
+                                        .font(.system(.title3, design: .rounded))
+                                        .foregroundColor(.white)
+                                        .bold()
+                                    
+                                    Text(p.company)
+                                        .font(.system(.body, design: .rounded))
+                                        .foregroundColor(textColor)
+                                        .padding(.bottom)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                    
+                                    Text("Socials")
+                                        .font(.system(.title3, design: .rounded))
+                                        .foregroundColor(.white)
+                                        .bold()
+                                }
                                 
-                                Text(p.role)
-                                    .font(.system(.body, design: .rounded))
-                                    .foregroundColor(textColor)
-                                    .fixedSize(horizontal: false, vertical: true)
-                                
-                                Text(p.location)
-                                    .font(.system(.body, design: .rounded))
-                                    .foregroundColor(textColor)
-                                    .padding(.bottom)
-                                    .fixedSize(horizontal: false, vertical: true)
-                                
-                                Text("About")
-                                    .font(.system(.title3, design: .rounded))
-                                    .foregroundColor(.white)
-                                    .bold()
-                                
-                                Text(p.about)
-                                    .font(.system(.body, design: .rounded))
-                                    .foregroundColor(textColor)
-                                    .padding(.bottom)
-                                    .multilineTextAlignment(.leading)
-                                //Necessary for making the interpreter not collapse the text
-                                    .fixedSize(horizontal: false, vertical: true)
-                                
-                                Text("Company name")
-                                    .font(.system(.title3, design: .rounded))
-                                    .foregroundColor(.white)
-                                    .bold()
-                                
-                                Text(p.company)
-                                    .font(.system(.body, design: .rounded))
-                                    .foregroundColor(textColor)
-                                    .padding(.bottom)
-                                    .fixedSize(horizontal: false, vertical: true)
-                                
-                                Text("Socials")
-                                    .font(.system(.title3, design: .rounded))
-                                    .foregroundColor(.white)
-                                    .bold()
+                                WrappingHStack{
+                                    Text(p.phone)
+                                        .font(.system(.body, design: .rounded))
+                                        .foregroundColor(.white)
+                                        .padding(5)
+                                        .fixedSize(horizontal: true, vertical: false)
+                                        .overlay(RoundedRectangle(cornerRadius: 3)
+                                            .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                        .padding(3)
+                                    Text(p.email)
+                                        .font(.system(.body, design: .rounded))
+                                        .foregroundColor(.white)
+                                        .padding(5)
+                                        .fixedSize(horizontal: true, vertical: false)
+                                        .overlay(RoundedRectangle(cornerRadius: 3)
+                                            .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                        .padding(3)
+                                    Text(p.linkedin)
+                                        .font(.system(.body, design: .rounded))
+                                        .foregroundColor(.white)
+                                        .padding(5)
+                                        .fixedSize(horizontal: true, vertical: false)
+                                        .overlay(RoundedRectangle(cornerRadius: 3)
+                                            .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                        .padding(3)
+                                    Text(p.whatsapp)
+                                        .font(.system(.body, design: .rounded))
+                                        .foregroundColor(.white)
+                                        .padding(5)
+                                        .fixedSize(horizontal: true, vertical: false)
+                                        .overlay(RoundedRectangle(cornerRadius: 3)
+                                            .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                        .padding(3)
+                                    Text(p.telegram)
+                                        .font(.system(.body, design: .rounded))
+                                        .foregroundColor(.white)
+                                        .padding(5)
+                                        .fixedSize(horizontal: true, vertical: false)
+                                        .overlay(RoundedRectangle(cornerRadius: 3)
+                                            .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                        .padding(3)
+                                }
                             }
                             
+                            Text("Tags")
+                                .font(.system(.title3, design: .rounded))
+                                .foregroundColor(.white)
+                                .bold()
+                            
+                            Spacer()
+                            
                             WrappingHStack{
-                                Text(p.phone)
-                                    .font(.system(.body, design: .rounded))
-                                    .foregroundColor(.white)
-                                    .padding(5)
-                                    .fixedSize(horizontal: true, vertical: false)
-                                    .overlay(RoundedRectangle(cornerRadius: 3)
-                                        .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
-                                    .padding(3)
-                                Text(p.email)
-                                    .font(.system(.body, design: .rounded))
-                                    .foregroundColor(.white)
-                                    .padding(5)
-                                    .fixedSize(horizontal: true, vertical: false)
-                                    .overlay(RoundedRectangle(cornerRadius: 3)
-                                        .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
-                                    .padding(3)
-                                Text(p.linkedin)
-                                    .font(.system(.body, design: .rounded))
-                                    .foregroundColor(.white)
-                                    .padding(5)
-                                    .fixedSize(horizontal: true, vertical: false)
-                                    .overlay(RoundedRectangle(cornerRadius: 3)
-                                        .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
-                                    .padding(3)
-                                Text(p.whatsapp)
-                                    .font(.system(.body, design: .rounded))
-                                    .foregroundColor(.white)
-                                    .padding(5)
-                                    .fixedSize(horizontal: true, vertical: false)
-                                    .overlay(RoundedRectangle(cornerRadius: 3)
-                                        .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
-                                    .padding(3)
-                                Text(p.telegram)
-                                    .font(.system(.body, design: .rounded))
-                                    .foregroundColor(.white)
-                                    .padding(5)
-                                    .fixedSize(horizontal: true, vertical: false)
-                                    .overlay(RoundedRectangle(cornerRadius: 3)
-                                        .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
-                                    .padding(3)
-                            }
-                        }
-                        
-                        Text("Tags")
-                            .font(.system(.title3, design: .rounded))
-                            .foregroundColor(.white)
-                            .bold()
-                        
-                        Spacer()
-                        
-                        WrappingHStack{
-                            ForEach(p.tags, id: \.self){ tag in
-                                Text(tag)
-                                    .foregroundColor(.white)
-                                    .padding(5)
-                                //.fixedSize(horizontal: true, vertical: false)
-                                    .overlay(RoundedRectangle(cornerRadius: 3)
-                                        .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
-                                    .padding(3)
+                                ForEach(p.tags, id: \.self){ tag in
+                                    Text(tag)
+                                        .foregroundColor(.white)
+                                        .padding(5)
+                                    //.fixedSize(horizontal: true, vertical: false)
+                                        .overlay(RoundedRectangle(cornerRadius: 3)
+                                            .stroke(Color(red: 0.584, green: 0.373, blue: 1.0), lineWidth: 2))
+                                        .padding(3)
+                                }
                             }
                         }
                     }
-                }
-                .padding(.leading)
-                HStack(spacing: geometry.size.width/4){
-                    
-                    Button(action: {
-                        // Action for the first button
-                        //print("First Button Tapped")
-                        currentIndex = (currentIndex + 1) //% 3
+                    .padding(.leading)
+                    HStack(spacing: geometry.size.width/4){
                         
-                    }) {
-                        Text("Reject")
-                            .padding()
-                            .background(Color.red)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                            .offset(y: geometry.size.width/40)
+                        Button(action: {
+                            // Action for the first button
+                            //print("First Button Tapped")
+                            currentIndex = (currentIndex + 1) //% 3
+                            
+                        }) {
+                            Text("Reject")
+                                .padding()
+                                .background(Color.red)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                                .offset(y: geometry.size.width/40)
+                        }
+                        NavigationLink(destination: CalendarView()){
+                            Button("Match"){
+                                matchList.append(p)
+                                isCalendarPresented = true
+                                currentIndex = (currentIndex + 1)
+                            }
+                                .padding()
+                                .background(Color.green)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                                .offset(y: geometry.size.width/40)
+                        }
+                        .navigationDestination(isPresented: $isCalendarPresented) {
+                            CalendarView()
+                        }
                     }
-                    Button(action: {
-                        // Action for the second button
-                        //print("Matched")
-                        currentIndex = (currentIndex + 1) //% 3
-                        matchList.append(p)
-                        //print(matchList)
-                        
-                    }) {
-                        Text("Match")
-                            .padding()
-                            .background(Color.green)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                            .offset(y: geometry.size.width/40)
-                    }
+                    .frame(width: geometry.size.width, height: geometry.size.height/6)
+                    .background(Color(red: 0.2, green: 0.2, blue: 0.2))
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height/6)
-                .background(Color(red: 0.2, green: 0.2, blue: 0.2))
+                .background(.black)
             }
-            .background(.black)
         }
     }
 }
