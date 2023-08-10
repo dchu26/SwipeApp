@@ -8,6 +8,7 @@
 import SwiftUI
 import WrappingHStack
 import Introspect
+import AlertToast
 
 private var inviteList: [Person] = []
 private var matchList: [Person] = []
@@ -139,6 +140,7 @@ struct ContentView: View {
 struct CalendarView: View {
     
     @State var currentDate: Date = Date()
+    @State var showToast = false
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false){
@@ -149,15 +151,19 @@ struct CalendarView: View {
         }
         .safeAreaInset(edge: .bottom){
             HStack {
-                Button {
-                    
-                } label: {
+                Button(action:  {
+                    showToast.toggle()
+                }) {
                     Text("Schedule Meeting")
                         .fontWeight(.bold)
                         .padding(.vertical)
                         .frame(maxWidth: .infinity)
                         .background(Color(red: 0.584, green: 0.373, blue: 1.0), in: Capsule())
                 }
+                .toast(isPresenting: $showToast){
+                    AlertToast(displayMode: .hud, type: .regular, title: "Meeting Requested!", style: .style(backgroundColor: Color(.green), titleColor: Color(.black)))
+                }
+                /*
                 Button {
                     
                 } label: {
@@ -166,7 +172,7 @@ struct CalendarView: View {
                         .padding(.vertical)
                         .frame(maxWidth: .infinity)
                         .background(Color(red: 0.584, green: 0.373, blue: 1.0), in: Capsule())
-                }
+                }*/
             }
             .padding(.horizontal)
             .padding(.top, 10)
@@ -853,24 +859,10 @@ struct MatchView: View {
                     .padding(.leading)
                     HStack(spacing: geometry.size.width/4){
                         
-                        Button(action: {
-                            // Action for the first button
-                            //print("First Button Tapped")
-                            currentIndex = (currentIndex + 1) //% 3
-                            
-                        }) {
-                            Text("Reject")
-                                .padding()
-                                .background(Color.red)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                                .offset(y: geometry.size.width/40)
-                        }
                         NavigationLink(destination: CalendarView()){
                             Button("Match"){
                                 matchList.append(p)
                                 isCalendarPresented = true
-                                currentIndex = (currentIndex + 1)
                             }
                                 .padding()
                                 .background(Color.green)
@@ -880,6 +872,20 @@ struct MatchView: View {
                         }
                         .navigationDestination(isPresented: $isCalendarPresented) {
                             CalendarView()
+                        }
+                        
+                        Button(action: {
+                            // Action for the first button
+                            //print("First Button Tapped")
+                            currentIndex = (currentIndex + 1) //% 3
+                            
+                        }) {
+                            Text("Next")
+                                .padding()
+                                .background(Color.cyan)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                                .offset(y: geometry.size.width/40)
                         }
                     }
                     .frame(width: geometry.size.width, height: geometry.size.height/6)
