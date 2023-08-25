@@ -161,7 +161,7 @@ struct CalendarView: View {
                         .background(Color(red: 0.584, green: 0.373, blue: 1.0), in: Capsule())
                 }
                 .toast(isPresenting: $showToast){
-                    AlertToast(displayMode: .hud, type: .regular, title: "Meeting Requested!", style: .style(backgroundColor: Color(.green), titleColor: Color(.black)))
+                    AlertToast(displayMode: .banner(.slide), type: .regular, title: "Meeting Requested!", style: .style(backgroundColor: Color(.green), titleColor: Color(.black)))
                 }
                 /*
                 Button {
